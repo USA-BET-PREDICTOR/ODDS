@@ -1,0 +1,195 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="google-site-verification" content="gEJGGOE9nj80hxIYjNPq-b1DmONzj-3zSyRV3tR6FWY" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOGIN</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+  .login-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    text-align: center;
+    width: 90%;
+    max-width: 350px;
+    transition: transform 0.2s ease-in-out, opacity 0.5s ease-in-out;
+    z-index: 1;
+  }
+  input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border 0.2s ease-in-out;
+    text-transform: uppercase; /* ÃƒÂ°Ã…Â¸Ã¢â‚¬ÂÃ‚Â¥ shows as uppercase */
+  }
+  input[type="text"].error {
+    border: 2px solid red;
+  }
+  button {
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+  }
+  button:hover {
+    background: #218838;
+  }
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 8px;
+    display: none;
+  }
+
+  /* Shake animation */
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    50% { transform: translateX(8px); }
+    75% { transform: translateX(-8px); }
+    100% { transform: translateX(0); }
+  }
+  .shake {
+    animation: shake 0.3s;
+  }
+
+  /* Fade-out animation */
+  .fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Spinner overlay */
+  .spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    display: none; /* hidden by default */
+  }
+  .spinner {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #28a745;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .spinner-text {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+  }
+
+  /* Responsive adjustment for mobile */
+  @media (max-height: 700px) {
+    body {
+      align-items: flex-start; /* move login box higher */
+      padding-top: 50px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="login-box" id="loginBox">
+  <h2>Enter Your Code</h2>
+  <form id="loginForm">
+    <input type="text" id="codeInput" placeholder=" " autofocus>
+    <button type="submit">Login</button>
+    <p id="error" class="error-message">This Code Is Incorrect</p>
+  </form>
+</div>
+
+<!-- Spinner Overlay -->
+<div class="spinner-overlay" id="spinnerOverlay">
+  <div class="spinner"></div>
+  <div class="spinner-text">Logging you in...</div>
+</div>
+
+<script>
+function login() {
+    var input = document.getElementById("codeInput");
+    var userid = input.value.trim().toLowerCase(); // always lowercase for matching
+    var error = document.getElementById("error");
+    var loginBox = document.getElementById("loginBox");
+    var spinner = document.getElementById("spinnerOverlay");
+
+    var validUsers = {
+        '1b500': 'https://krampah.com/business.html ',
+        '1b4': 'https://krampah.com/business.html ',
+	'1b2': 'https://krampah.com/business.html',
+	'1d6': 'https://krampah.com/business.html ',		
+        '1g3': 'https://krampah.com/ghana/1b4.html '
+    };
+
+    if (validUsers[userid]) {
+        error.style.display = "none"; 
+        input.classList.remove("error"); 
+        loginBox.classList.add("fade-out"); 
+        setTimeout(() => {
+          spinner.style.display = "flex"; 
+        }, 500);
+        setTimeout(() => {
+          window.location.href = validUsers[userid]; 
+        }, 1500);
+    } else {
+        error.style.display = "block"; 
+        input.classList.add("error"); 
+        loginBox.classList.add("shake"); 
+        setTimeout(() => {
+          loginBox.classList.remove("shake");
+          input.focus();   // ÃƒÂ°Ã…Â¸Ã¢â‚¬ÂÃ‚Â¥ auto-focus back
+          input.select();  // ÃƒÂ°Ã…Â¸Ã¢â‚¬ÂÃ‚Â¥ auto-select wrong code for quick retype
+        }, 300); 
+    }
+}
+
+// Run login when form is submitted (button click OR Enter key)
+document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // stop page refresh
+    login();
+});
+
+// Clear error message while typing
+document.getElementById("codeInput").addEventListener("input", function() {
+    this.classList.remove("error");
+    document.getElementById("error").style.display = "none";
+});
+</script>
+
+</body>
+</html>
