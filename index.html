@@ -87,21 +87,7 @@
             return;
         }
 
-        // Define the upcoming matches (in lowercase for easier comparison)
-        var match1 = ["al feiha", "al ittihad"];
-        var match2 = ["real oviedo", "espanyol"];
-
-        // Check if the entered teams match any of the two upcoming matches (in any order)
-        var isUpcomingMatch =
-            (match1.includes(team1) && match1.includes(team2)) ||
-            (match2.includes(team1) && match2.includes(team2));
-
-        // If teams are not part of upcoming matches, show warning
-        if (!isUpcomingMatch) {
-            alert("Check these matches AL FEIHA VRS AL ITTIHAD OR REAL OVIEDO VRS ESPANYOL");
-            return;
-        }
-
+     
         // Continue only if teams are part of the upcoming matches
         var outcomes = ["HOME OR AWAY", "OVER 1.5", "1ST HALF UNDER 2.5"];
         var randomIndex = Math.floor(Math.random() * outcomes.length);
