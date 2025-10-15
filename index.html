@@ -45,12 +45,19 @@
             margin-top: 20px;
             color: #FFFFFF;
         }
-		
+
         footer {
             background-color: black;
             color: white;
             padding: 20px;
             text-align: center;
+        }
+
+        .warning {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -87,8 +94,6 @@
             return;
         }
 
-     
-        // Continue only if teams are part of the upcoming matches
         var outcomes = ["HOME OR AWAY", "OVER 1.5", "1ST HALF UNDER 2.5"];
         var randomIndex = Math.floor(Math.random() * outcomes.length);
         var suggestedOutcome = outcomes[randomIndex];
@@ -100,7 +105,9 @@
 
         var result =
             'Shots Attempt: ' + team1.toUpperCase() + ' ' + Team1 + ' - ' + Team2 + ' ' + team2.toUpperCase() + '<br>' +
-            'Shots On Target: ' + team1.toUpperCase() + ' ' + shotsOnTargetTeam1 + ' - ' + shotsOnTargetTeam2 + ' ' + team2.toUpperCase();
+            'Shots On Target: ' + team1.toUpperCase() + ' ' + shotsOnTargetTeam1 + ' - ' + shotsOnTargetTeam2 + ' ' + team2.toUpperCase() +
+            '<br><span class="warning">If you type a wrong team, the bet robot will connect it to an upcoming match.<br>' +
+            'with similar name in another country league. Thank you.</span>';
 
         document.getElementById("result").innerHTML =
             "BET ODDS: " + suggestedOutcome +
