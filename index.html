@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,13 +16,13 @@
         }
 
         h1 {
-            color: #FFFFFF;
+            color: #FFFFFF; /* White */
         }
 
         label {
             display: block;
             margin: 10px 0;
-            color: #FFFFFF;
+            color: #FFFFFF; /* White */
         }
 
         input {
@@ -30,43 +33,36 @@
 
         button {
             padding: 10px;
-            background-color: #4CAF50;
-            color: #FFFFFF;
+            background-color: #4CAF50; /* Green */
+            color: #FFFFFF; /* White */
             border: none;
             cursor: pointer;
         }
 
         button:disabled {
-            background-color: #555;
+            background-color: #555; /* Grey */
             cursor: not-allowed;
         }
 
         h2 {
             margin-top: 20px;
-            color: #FFFFFF;
+            color: #FFFFFF; /* White */
         }
-
+		
         footer {
             background-color: black;
             color: white;
             padding: 20px;
             text-align: center;
         }
-
-        .warning {
-            color: red;
-            font-weight: bold;
-            margin-top: 10px;
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
-<marquee behavior="scroll" direction="left">
-    <b>TUESDAY MATCHES :  1.  BARCELONA  VRS  OLYMPIACOS <>  2. ARSENAL  VRS ATLETICO MADRID </b>
-</marquee>
 
-<h1>Enter Two Teams Playing</h1>
+    <B>MATCH TO CHECK : BARCELONA VRS OLYMPIACOS </B>
+
+
+<h1>Enter The Two Teams Playing </h1>
 
 <label for="team1">Enter Team 1:</label>
 <input type="text" id="team1" placeholder="Team 1">
@@ -82,14 +78,14 @@
 
 <br>
 
-<b id="result"></b>
+<B id="result"></B>
 
 <script>
     function suggestOutcome() {
-        var team1 = document.getElementById("team1").value.trim().toLowerCase();
-        var team2 = document.getElementById("team2").value.trim().toLowerCase();
+        var team1 = document.getElementById("team1").value.toLowerCase();
+        var team2 = document.getElementById("team2").value.toLowerCase();
 
-        if (team1 === "" || team2 === "") {
+        if (team1.trim() === "" || team2.trim() === "") {
             alert("Please enter both teams");
             return;
         }
@@ -97,22 +93,22 @@
         var outcomes = ["HOME OR AWAY", "OVER 1.5", "1ST HALF UNDER 2.5"];
         var randomIndex = Math.floor(Math.random() * outcomes.length);
         var suggestedOutcome = outcomes[randomIndex];
-
         var Team1 = Math.floor(Math.random() * 10) + 1;
         var Team2 = Math.floor(Math.random() * 10) + 1;
         var shotsOnTargetTeam1 = Math.floor(Math.random() * 6);
         var shotsOnTargetTeam2 = Math.floor(Math.random() * 5);
 
-        var result =
-            'Shots Attempt: ' + team1.toUpperCase() + ' ' + Team1 + ' - ' + Team2 + ' ' + team2.toUpperCase() + '<br>' +
-            'Shots On Target: ' + team1.toUpperCase() + ' ' + shotsOnTargetTeam1 + ' - ' + shotsOnTargetTeam2 + ' ' + team2.toUpperCase() +
-            '<br><span class="warning">If you type a wrong team, the bet robot will connect it to an upcoming match.<br>' +
-            'with similar name in another country league. Thank you.</span>';
+        var result = 'Shots Attempt: ' + team1 + ' ' + Team1 + ' - ' + Team2 + ' ' + team2 + '<br>' +
+                     'Shots On Target: ' + team1 + ' ' + shotsOnTargetTeam1 + ' - ' + shotsOnTargetTeam2 + ' ' + team2;
 
-        document.getElementById("result").innerHTML =
-            "BET ODDS: " + suggestedOutcome +
-            "<br><p><a href='https://krampah.com/choose.html'>CHECK ANOTHER MATCH</a><br>" +
-            "<p><br><p>" + result;
+        if (team1 === "liverpool" && team2 === "arsenal") {
+            result = "Team 1 (Liverpool): Alisson, Soboslai, Van Dijk, Konate, Gravenberch, Mac Allister, Wirtz, Isak, Salah, Eketike<br>" +
+                     "Team 2 (Arsenal): Ben White, Gabriel, Saliba, Carlifori,  Zubemendi, Odegaard, Rice, Eze, Gyokoras, Saka <br><br>" + result;
+        }
+
+        document.getElementById("result").innerHTML = "BET ODDS: " + suggestedOutcome + 
+            "<br><p><a href=' https://krampah.com/page2.html '>  CHECK ANOTHER MATCH </a><br>" +
+            "<p>   <br><p>" + result;
 
         // Disable the button after it is clicked
         document.querySelector('button').disabled = true;
@@ -121,8 +117,11 @@
 
 <p><br><p><br><p><br><p>
 
+
 </body>
 </html>
+
+
 
 
 
